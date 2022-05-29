@@ -35,7 +35,7 @@ class EventsController extends BaseController
     public function getWarmupEvents()
     {
         try {
-            return $this->event->events();             
+            return response()->json(['data' => $this->event->events()]);          
         } catch (\Exception $ex) {
             return $ex->getMessage();
         }
@@ -133,7 +133,11 @@ class EventsController extends BaseController
      */
     public function getEventsWithWorkshops()
     {
-        throw new \Exception('implement in coding task 1');
+        try {
+            return response()->json(['data' => $this->event->events()]);          
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
     }
 
 
@@ -219,7 +223,8 @@ class EventsController extends BaseController
     public function getFutureEventsWithWorkshops()
     {
         try {
-             return $this->event->futureEvents();
+             
+             return response()->json(['data' => $this->event->futureEvents()]);
         } catch (\Exception $ex) {
             return $ex->getMessage();
         }

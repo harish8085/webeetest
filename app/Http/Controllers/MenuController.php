@@ -8,6 +8,19 @@ use Illuminate\Routing\Controller as BaseController;
 
 class MenuController extends BaseController
 {
+    protected $menuItems;
+    
+    /**
+     * Method __construct
+     *
+     * @param MenuItem $menuItems [explicite description]
+     *
+     * @return void
+     */
+    public function __construct(MenuItem $menuItems)
+    {
+        $this->menuItems = $menuItems;
+    }
     /*
     Requirements:
     - the eloquent expressions should result in EXACTLY one SQL query no matter the nesting level or the amount of menu items.
@@ -95,6 +108,12 @@ class MenuController extends BaseController
      */
 
     public function getMenuItems() {
-        throw new \Exception('implement in coding task 3');
+
+        try {
+            return response()->json(['data' => $this->menuItems->menuItmes()]);         
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
+        
     }
 }
