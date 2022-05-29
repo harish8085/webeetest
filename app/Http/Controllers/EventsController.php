@@ -210,9 +210,18 @@ class EventsController extends BaseController
     ]
     ```
      */
-
+    
+    /**
+     * Method getFutureEventsWithWorkshops
+     *
+     * @return void
+     */
     public function getFutureEventsWithWorkshops()
     {
-        throw new \Exception('implement in coding task 2');
+        try {
+             return $this->event->futureEvents();
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
     }
 }
