@@ -9,10 +9,36 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Date;
 
+
 class EventsController extends BaseController
 {
-    public function getWarmupEvents() {
-        return Event::all();
+
+    protected $event;
+
+    /**
+     * Method __construct
+     *
+     * @param Event $event [explicite description]
+     *
+     * @return void
+     */
+    public function __construct(Event $event)
+    {
+        $this->event = $event;
+    }
+
+    /**
+     * Method getWarmupEvents
+     *
+     * @return void
+     */
+    public function getWarmupEvents()
+    {
+        try {
+            return $this->event->events();             
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
     }
 
     /*
@@ -99,8 +125,14 @@ class EventsController extends BaseController
         }
     ]
      */
-
-    public function getEventsWithWorkshops() {
+    
+    /**
+     * Method getEventsWithWorkshops
+     *
+     * @return void
+     */
+    public function getEventsWithWorkshops()
+    {
         throw new \Exception('implement in coding task 1');
     }
 
@@ -179,7 +211,8 @@ class EventsController extends BaseController
     ```
      */
 
-    public function getFutureEventsWithWorkshops() {
+    public function getFutureEventsWithWorkshops()
+    {
         throw new \Exception('implement in coding task 2');
     }
 }
